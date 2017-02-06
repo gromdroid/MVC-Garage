@@ -80,6 +80,7 @@ public class Model extends java.util.Observable {
     static int paymentSpeed = 7; // number of cars that can pay per minute
     static int exitSpeed = 5; // number of cars that can leave per minute
 
+    static String weekDayNPopup, weekEndNPopup, weekDayPPopup, weekEndPPopup, weekDayEPopup, weekEndEPopup, weekDayPEPopup, weekEndPEPopup;
     
 	public Model(){
 		entranceCarQueue = new CarQueue();
@@ -92,10 +93,7 @@ public class Model extends java.util.Observable {
         exitCarQueue = new CarQueue();
         myView = new View(3, 6, 30);
         
-        /**
-        String weekDayPassPopup = JOptionPane.showInputDialog("Please enter the number of passholers:", null);
-        weekDayPassArrivals = Integer.parseInt(weekDayPassPopup);
-        **/
+        Controller.setCustomValues();
         
         run();
 	} 
@@ -104,10 +102,10 @@ public class Model extends java.util.Observable {
     	//Controller.generatePreserved();
 		while(true){
 			if(day == 3 && hour > 17){
-				weekDayArrivals = 100;
-				weekDayPassArrivals = 30;
-				weekDayElectricArrivals = 18;
-				weekDayPassElectricArrivals = 0;
+				weekDayArrivals = Integer.parseInt(weekDayNPopup) * 0.5;
+				weekDayPassArrivals = Integer.parseInt(weekDayPPopup) * 0.5;
+				weekDayElectricArrivals = Integer.parseInt(weekDayEPopup) * 0.5;
+				weekDayPassElectricArrivals = Integer.parseInt(weekDayPEPopup) * 0.5;
 			} else if(day == 3 && hour > 21){
 				weekDayArrivals = 20;
 				weekDayPassArrivals = 0;
@@ -121,21 +119,21 @@ public class Model extends java.util.Observable {
         		weekDayPreservedArrivals = 0;
         	} else if(hour > 17 && day < 5){
         		weekDayArrivals = 20;
-        		weekDayPassArrivals = 00;
+        		weekDayPassArrivals = 0;
         		weekDayElectricArrivals = 0;
         		weekDayPassElectricArrivals = 0;
         		weekDayPreservedArrivals = 0;
         	} else if(hour > 10 && day < 5){
-        		weekDayArrivals = 150;
+        		weekDayArrivals = Integer.parseInt(weekDayNPopup);
         		weekDayPassArrivals = 0;
         		weekDayElectricArrivals = 20;
         		weekDayPassElectricArrivals = 0;
         		weekDayPreservedArrivals = 20;
         	} else if(day < 5) {
-        		weekDayArrivals = 150;
-        		weekDayPassArrivals = 28;
-        		weekDayElectricArrivals = 20;
-        		weekDayPassElectricArrivals = 20;
+        		weekDayArrivals = Integer.parseInt(weekDayNPopup);
+        		weekDayPassArrivals = Integer.parseInt(weekDayPPopup);
+        		weekDayElectricArrivals = Integer.parseInt(weekDayEPopup);
+        		weekDayPassElectricArrivals = Integer.parseInt(weekDayPEPopup);
         		weekDayPreservedArrivals = 20;
         	} else if(hour > 18 && day >= 5){
         		weekendPassArrivals = 0;
@@ -143,10 +141,10 @@ public class Model extends java.util.Observable {
         		weekendElectricArrivals = 0;
         		weekendPassElectricArrivals = 0;
         	} else if(hour > 10 && day >= 5){
-        		weekendArrivals = 200;
+        		weekendArrivals = Integer.parseInt(weekEndNPopup);
         		weekendPassArrivals = 0;
-        		weekendElectricArrivals = 20;
-        		weekendPassElectricArrivals = 0;
+        		weekendElectricArrivals = Integer.parseInt(weekEndEPopup);
+        		weekendPassElectricArrivals = Integer.parseInt(weekEndPEPopup);
         		weekendPreservedArrivals = 20;
         	} else if(hour < 9 && day >= 5){
         		weekendPassArrivals = 0;
@@ -154,10 +152,10 @@ public class Model extends java.util.Observable {
         		weekendElectricArrivals = 0;
         		weekendPassElectricArrivals = 0;
         	} else if(day >= 5){
-        		weekendPassArrivals = 20;
-        		weekendArrivals = 200;
-        		weekendElectricArrivals = 20;
-        		weekendPassElectricArrivals = 30;
+        		weekendPassArrivals = Integer.parseInt(weekEndPPopup);
+        		weekendArrivals = Integer.parseInt(weekEndNPopup);
+        		weekendElectricArrivals = Integer.parseInt(weekEndEPopup);
+        		weekendPassElectricArrivals = Integer.parseInt(weekEndPEPopup);
         	}
 			tick();
 		}

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 class Controller implements java.awt.event.ActionListener {
 
@@ -71,108 +72,24 @@ class Controller implements java.awt.event.ActionListener {
         return car;
     }
     
-    public static Location getFirstFreeLoc(String type){
-    	int amountCarsPE = 10;
-    	int amountCarsP = 105;
-    	int amountCarsN = 160;
-    	int amountCarsE = 25;
-    	int placePE, placeP, placeN, placeE;
-    	
-    	int floorPE = (int) Math.ceil((double) amountCarsPE / 180);
-		int rowPE = (int) Math.ceil((double) amountCarsPE / 30);
-		rowPE = rowPE % 6;
-		
-		int floorP = (int) Math.ceil((double) amountCarsP / 180);
-		int rowP = (int) Math.ceil((double) amountCarsP / 30);
-		rowP = rowP % 6;
-		
-		int floorN = (int) Math.ceil((double) amountCarsN / 180);
-		int rowN = (int) Math.ceil((double) amountCarsN / 30);
-		rowN = rowN % 6;
-		
-		int floorE = (int) Math.ceil((double) amountCarsE / 180);
-		int rowE = (int) Math.ceil((double) amountCarsE / 30);
-		rowE = rowE % 6;
-    		
-		if(amountCarsPE < 30){
-			placePE = amountCarsPE;
-		} else {
-			placePE = amountCarsPE % 30;	
-		}
-		
-		if(amountCarsN < 30){
-			placeN = amountCarsN;
-		} else {
-			placeN = amountCarsN % 30;	
-		}
-		
-		if(amountCarsP < 30){
-			placeP = amountCarsP;
-		} else {
-			placeP = amountCarsP % 30;	
-		}
-		
-		if(amountCarsE < 30){
-			placeE = amountCarsE;
-		} else {
-			placeE = amountCarsE % 30;	
-		}
-    	
-    	if(type == "PE"){
-    		for (int floor = 0; floor < floorPE; floor++) {
-                for (int row = 0; row < rowPE; row++) {
-                    for (int place = 0; place < placePE; place++) {
-                        Location location = new Location(floor, row, place);
-                        if (getCarAt(location) == null) {
-                            return location;
-                        }
-                    }
-                }
-    		}
-    	} else if(type == "P"){
-    		for (int floor = floorPE; floor < floorP; floor++) {
-    			if(floor == 0){
-    				
-    			}
-                for (int row = rowPE; row < rowP; row++) {
-                    for (int place = placePE; place < placeP; place++) {
-                        Location location = new Location(floor, row, place);
-                        if (getCarAt(location) == null) {
-                            return location;
-                        }
-                    }
-                }
-    		}
-    		
-    	} else if(type == "N"){
-    		for (int floor = floorP; floor < floorN; floor++) {
-                for (int row = rowP; row < rowN; row++) {
-                    for (int place = placeP; place < placeN; place++) {
-                        Location location = new Location(floor, row, place);
-                        if (getCarAt(location) == null) {
-                            return location;
-                        }
-                    }
-                }
-    		}
-    		
-    	} else if(type == "E"){
-    		for (int floor = floorN; floor < floorE; floor++) {
-                for (int row = rowN; row < rowE; row++) {
-                    for (int place = placeN; place < placeE; place++) {
-                        Location location = new Location(floor, row, place);
-                        if (getCarAt(location) == null) {
-                            return location;
-                        }
-                    }
-                }
-    		}
-    		
-    	}
-    	return null;
+    public static void setCustomValues(){
+    	Model.weekDayNPopup = JOptionPane.showInputDialog("Please enter the number of normal cars per hour during the week:", "150");
+    	Model.weekDayPassArrivals = Integer.parseInt(Model.weekDayNPopup);
+    	Model.weekEndNPopup = JOptionPane.showInputDialog("Please enter the number of normal cars per hour during the weekend:", "200");
+    	Model.weekDayPassArrivals = Integer.parseInt(Model.weekEndNPopup);
+    	Model.weekDayPPopup = JOptionPane.showInputDialog("Please enter the number of passholers per hour during the week:", "28");
+    	Model.weekDayPassArrivals = Integer.parseInt(Model.weekDayPPopup);
+    	Model.weekEndPPopup = JOptionPane.showInputDialog("Please enter the number of passholers per hour during the weekend:", "20");
+    	Model.weekDayPassArrivals = Integer.parseInt(Model.weekEndPPopup);
+    	Model.weekDayEPopup = JOptionPane.showInputDialog("Please enter the number of electric cars per hour during the week:", "20");
+    	Model.weekDayPassArrivals = Integer.parseInt(Model.weekDayEPopup);
+    	Model.weekEndEPopup = JOptionPane.showInputDialog("Please enter the number of electric cars per hour during the weekend:", "20");
+    	Model.weekDayPassArrivals = Integer.parseInt(Model.weekEndEPopup);
+    	Model.weekDayPEPopup = JOptionPane.showInputDialog("Please enter the number of electric car passholers per hour during the week:", "20");
+    	Model.weekDayPassArrivals = Integer.parseInt(Model.weekDayEPopup);
+    	Model.weekEndPEPopup = JOptionPane.showInputDialog("Please enter the number of electric car passholers per hour during the weekend:", "20");
+    	Model.weekDayPassArrivals = Integer.parseInt(Model.weekEndEPopup);
     }
-    
-    
     public static Location getFirstFreeLocation(String type) {
     	if(type == "N" || type == "R"){
     		for (int floor = 0; floor < Model.getNumberOfFloors(); floor++) {

@@ -441,12 +441,12 @@ public class View extends JFrame {
 		setBackground(Color.black);
         
         //create the file menu
-        JMenu fileMenu = new JMenu("Export");
+        JMenu fileMenu = new JMenu("Settings");
         menubar.add(fileMenu);
         
-        JMenuItem expSim = new JMenuItem("Save to image");
+        JMenuItem expSim = new JMenuItem("Change values");
         expSim.addActionListener((ActionEvent event) -> {
-        //	Controller.exportImage();
+        	Controller.setCustomValues();
         });
         //openItem.addActionListener(this);
         fileMenu.add(expSim);
