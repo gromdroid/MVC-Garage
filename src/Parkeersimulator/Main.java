@@ -1,11 +1,11 @@
 package Parkeersimulator;
 
-public class Main{
+public class Main {
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
 
 		RunMVC mainRunMVC = new RunMVC();
 
-	} //main()
+	} // main()
 
-} //Main
+} // Main
